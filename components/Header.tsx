@@ -109,10 +109,8 @@ export function Header() {
             {mounted && user ? (
               <>
                 <Dialog>
-                  <DialogTrigger asChild>
-                    <button className="flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-sm font-semibold hover:bg-primary/20 transition-colors">
-                      💎 {user.points || 0}
-                    </button>
+                  <DialogTrigger render={<button className="flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-sm font-semibold hover:bg-primary/20 transition-colors" />}>
+                    💎 {user.points || 0}
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-md">
                     <DialogHeader>

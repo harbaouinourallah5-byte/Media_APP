@@ -100,10 +100,8 @@ export function RedeemPointsButton({
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger asChild>
-          <Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg shadow-primary/25 rounded-xl h-12 text-md font-bold transition-all hover:scale-[1.02]">
-            Redeem for Free! 🎁
-          </Button>
+        <DialogTrigger render={<Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg shadow-primary/25 rounded-xl h-12 text-md font-bold transition-all hover:scale-[1.02]" />}>
+          Redeem for Free! 🎁
         </DialogTrigger>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
