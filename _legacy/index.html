@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Medina Beauty | جمالك الطبيعي</title>
+
+
+<meta name="description" content="Medina Beauty - مستحضرات تجميل وعناية بالبشرة بروح تونسية">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<link rel="stylesheet" href="assets/css/home.css">
+
+
+</head>
+
+
+<body>
+
+
+
+<!-- LOADER -->
+
+<div class="loader">
+
+<div class="loader-logo">
+
+Medina Beauty
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- HEADER -->
+
+
+<header class="header">
+
+
+<div class="container nav">
+
+
+<div class="logo">
+
+Medina Beauty
+
+</div>
+
+
+
+
+
+<nav>
+
+
+<a href="index.html" data-lang="home">
+
+الرئيسية
+
+</a>
+
+
+<a href="shop.html" data-lang="shop">
+
+المتجر
+
+</a>
+
+
+<a href="about.html" data-lang="about">
+
+قصتنا
+
+</a>
+
+
+<a href="contact.html" data-lang="contact">
+
+تواصل معنا
+
+</a>
+
+
+</nav>
+
+
+
+
+
+
+<div class="languages">
+
+
+<button onclick="changeLanguage('ar')">
+
+🇹🇳
+
+</button>
+
+
+<button onclick="changeLanguage('fr')">
+
+🇫🇷
+
+</button>
+
+
+<button onclick="changeLanguage('en')">
+
+🇬🇧
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="icons">
+
+
+
+<button>
+
+
+
+⌕
+
+
+
+</button>
+
+
+
+<button onclick="location.href='wishlist.html'" aria-label="المفضلة">
+
+
+
+♡
+
+
+
+</button>
+
+
+
+<button onclick="location.href='cart.html'" aria-label="السلة">
+
+
+
+🛒
+
+
+
+</button>
+
+
+
+<button class="menu-btn" onclick="openMenu()">
+
+
+
+☰
+
+
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+<!-- MOBILE MENU -->
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+
+<button onclick="closeMenu()">
+
+×
+
+</button>
+
+
+<a href="index.html" data-lang="home">
+
+الرئيسية
+
+</a>
+
+
+<a href="shop.html" data-lang="shop">
+
+المتجر
+
+</a>
+
+
+<a href="about.html" data-lang="about">
+
+قصتنا
+
+</a>
+
+
+<a href="contact.html" data-lang="contact">
+
+تواصل معنا
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- HERO -->
+
+
+<section class="hero">
+
+
+<div class="hero-content">
+
+
+
+<p class="subtitle">
+
+جمال مستوحى من روح البحر الأبيض المتوسط
+
+</p>
+
+
+
+
+
+<h1 data-lang="heroTitle">
+
+
+اكتشفي جمالك الطبيعي مع
+
+<span>
+
+Medina Beauty
+
+</span>
+
+
+</h1>
+
+
+
+
+
+<p class="description" data-lang="heroText">
+
+
+منتجات تجميل وعناية بالبشرة مختارة بعناية بلمسة تونسية عصرية.
+
+
+</p>
+
+
+
+
+
+<div class="buttons">
+
+
+<a href="shop.html" class="primary" data-lang="shopNow">
+
+تسوقي الآن
+
+</a>
+
+
+
+<a href="about.html" class="secondary">
+
+اكتشفي قصتنا
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- STATS -->
+
+
+<section class="stats">
+
+
+<div class="container stats-grid">
+
+
+
+<div>
+
+<h2>
+
+15K+
+
+</h2>
+
+
+<p>
+
+عميلة سعيدة
+
+</p>
+
+
+</div>
+
+
+
+
+<div>
+
+<h2>
+
+200+
+
+</h2>
+
+
+<p>
+
+منتج فاخر
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<h2>
+
+98%
+
+</h2>
+
+
+<p>
+
+رضا العملاء
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<h2>
+
+24H
+
+</h2>
+
+
+<p data-lang="delivery">
+
+توصيل سريع
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- CATEGORIES -->
+
+
+<section class="categories">
+
+
+<div class="title">
+
+
+<span>
+
+اكتشفي
+
+</span>
+
+
+<h2 data-lang="categories">
+
+أقسامنا
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="category-grid">
+
+
+
+<div class="category">
+
+💄
+
+<h3>
+
+مكياج
+
+</h3>
+
+
+</div>
+
+
+
+
+
+<div class="category">
+
+🌿
+
+<h3>
+
+العناية بالبشرة
+
+</h3>
+
+
+</div>
+
+
+
+
+
+
+<div class="category">
+
+🌸
+
+<h3>
+
+العطور
+
+</h3>
+
+
+</div>
+
+
+
+
+
+
+<div class="category">
+
+✨
+
+<h3>
+
+العناية بالشعر
+
+</h3>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PRODUCTS -->
+
+
+<section class="featured">
+
+
+<div class="title">
+
+
+<span>
+
+الأكثر طلباً
+
+</span>
+
+
+<h2 data-lang="featured">
+
+منتجات مميزة
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+<div class="product-container" id="homeProducts">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- WHATSAPP -->
+
+
+<a class="whatsapp">
+
+💬
+
+</a>
+
+
+
+
+
+
+
+
+
+<footer>
+
+
+<h2>
+
+Medina Beauty
+
+</h2>
+
+
+<p>
+
+جمال مستوحى من تونس ✨
+
+</p>
+
+
+
+<div>
+
+© 2026 Medina Beauty
+
+</div>
+
+
+</footer>
+
+
+
+
+
+
+
+<script src="assets/js/main.js"></script>
+
+<script src="assets/js/language.js"></script>
+
+<script src="assets/js/home.js"></script>
+
+
+
+</body>
+
+</html>

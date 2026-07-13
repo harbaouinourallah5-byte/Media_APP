@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Medina Beauty | المنتج</title>
+
+
+<meta name="description" content="تفاصيل المنتج - Medina Beauty">
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+
+
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<link rel="stylesheet" href="assets/css/product.css">
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+<!-- HEADER -->
+
+
+<header class="header">
+
+
+<div class="container nav">
+
+
+<div class="logo">
+
+Medina Beauty
+
+</div>
+
+
+
+
+
+
+<nav>
+
+
+<a href="index.html" data-lang="home">
+
+الرئيسية
+
+</a>
+
+
+
+<a href="shop.html" data-lang="shop">
+
+المتجر
+
+</a>
+
+
+
+<a href="about.html" data-lang="about">
+
+قصتنا
+
+</a>
+
+
+
+<a href="contact.html" data-lang="contact">
+
+تواصل معنا
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+
+
+
+<div class="languages">
+
+
+<button onclick="changeLanguage('ar')">
+
+🇹🇳
+
+</button>
+
+
+<button onclick="changeLanguage('fr')">
+
+🇫🇷
+
+</button>
+
+
+<button onclick="changeLanguage('en')">
+
+🇬🇧
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="icons">
+
+
+<button>
+
+⌕
+
+</button>
+
+
+<button>
+
+♡
+
+</button>
+
+
+<button>
+
+🛒
+
+</button>
+
+
+
+<button class="menu-btn" onclick="openMenu()">
+
+☰
+
+</button>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<!-- MOBILE MENU -->
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+
+<button onclick="closeMenu()">
+
+×
+
+</button>
+
+
+
+<a href="index.html">
+
+الرئيسية
+
+</a>
+
+
+
+<a href="shop.html">
+
+المتجر
+
+</a>
+
+
+
+<a href="about.html">
+
+قصتنا
+
+</a>
+
+
+
+<a href="contact.html">
+
+تواصل معنا
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- PRODUCT -->
+
+
+<section class="product-page">
+
+
+
+<div class="product-details" id="productDetails">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ORDER POPUP -->
+
+
+<div class="order-overlay" id="orderPopup">
+
+
+
+<div class="order-box">
+
+
+
+<button 
+class="close-order"
+onclick="closeOrder()">
+
+×
+
+</button>
+
+
+
+
+
+<h2>
+
+إتمام الطلب 🛍️
+
+</h2>
+
+
+
+
+<p>
+
+الدفع عند الاستلام 💵
+
+</p>
+
+
+
+
+
+
+<input
+
+id="customerName"
+
+type="text"
+
+placeholder="الاسم الكامل">
+
+
+
+
+
+
+<input
+
+id="customerPhone"
+
+type="tel"
+
+placeholder="رقم الهاتف">
+
+
+
+
+
+
+
+<select id="customerCity">
+
+
+
+<option value="">
+
+اختر الولاية
+
+</option>
+
+
+
+<option>
+
+تونس
+
+</option>
+
+
+<option>
+
+أريانة
+
+</option>
+
+
+<option>
+
+بن عروس
+
+</option>
+
+
+<option>
+
+منوبة
+
+</option>
+
+
+<option>
+
+نابل
+
+</option>
+
+
+<option>
+
+سوسة
+
+</option>
+
+
+<option>
+
+المنستير
+
+</option>
+
+
+<option>
+
+صفاقس
+
+</option>
+
+
+<option>
+
+بنزرت
+
+</option>
+
+
+<option>
+
+القيروان
+
+</option>
+
+
+<option>
+
+قابس
+
+</option>
+
+
+<option>
+
+مدنين
+
+</option>
+
+
+
+</select>
+
+
+
+
+
+
+
+<textarea
+
+id="customerAddress"
+
+placeholder="العنوان بالتفصيل">
+
+</textarea>
+
+
+
+
+
+
+<button 
+
+class="send-order"
+
+onclick="sendOrder()">
+
+
+تأكيد الطلب عبر واتساب 💬
+
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- WHATSAPP -->
+
+
+<a class="whatsapp">
+
+💬
+
+</a>
+
+
+
+
+
+
+
+
+<footer>
+
+
+<h2>
+
+Medina Beauty
+
+</h2>
+
+
+<p>
+
+جمال مستوحى من تونس ✨
+
+</p>
+
+
+
+
+<div>
+
+© 2026 Medina Beauty
+
+</div>
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+<script src="assets/js/main.js"></script>
+
+<script src="assets/js/language.js"></script>
+
+<script src="assets/js/product.js"></script>
+
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Velvet Matte Lipstick",
+    "category": "مكياج",
+    "price": 39,
+    "rating": 4.9,
+    "image": "assets/images/products/lipstick1.jpg",
+    "description": "أحمر شفاه مخملي يدوم طويلاً ويمنح مظهراً أنيقاً."
+  },
+  {
+    "id": 2,
+    "name": "Hydra Glow Serum",
+    "category": "العناية بالبشرة",
+    "price": 69,
+    "rating": 4.8,
+    "image": "assets/images/products/serum1.jpg",
+    "description": "سيروم مرطب يمنح البشرة إشراقة طبيعية."
+  },
+  {
+    "id": 3,
+    "name": "Rose Face Cream",
+    "category": "العناية بالبشرة",
+    "price": 55,
+    "rating": 4.7,
+    "image": "assets/images/products/cream1.jpg",
+    "description": "كريم غني بالترطيب مناسب للاستخدام اليومي."
+  },
+  {
+    "id": 4,
+    "name": "Luxury Perfume",
+    "category": "العطور",
+    "price": 129,
+    "rating": 5,
+    "image": "assets/images/products/perfume1.jpg",
+    "description": "عطر فاخر يدوم طوال اليوم."
+  },
+  {
+    "id": 5,
+    "name": "Volume Mascara",
+    "category": "مكياج",
+    "price": 45,
+    "rating": 4.8,
+    "image": "assets/images/products/mascara1.jpg",
+    "description": "ماسكارا تمنح كثافة وطولاً للرموش."
+  },
+  {
+    "id": 6,
+    "name": "Vitamin C Cleanser",
+    "category": "العناية بالبشرة",
+    "price": 49,
+    "rating": 4.6,
+    "image": "assets/images/products/cleanser1.jpg",
+    "description": "غسول لطيف ينظف البشرة ويمنحها انتعاشاً."
+  },
+  {
+    "id": 7,
+    "name": "Hair Repair Oil",
+    "category": "العناية بالشعر",
+    "price": 42,
+    "rating": 4.9,
+    "image": "assets/images/products/hair1.jpg",
+    "description": "زيت مغذٍ يساعد على تقوية الشعر ولمعانه."
+  },
+  {
+    "id": 8,
+    "name": "Beauty Blender",
+    "category": "مكياج",
+    "price": 19,
+    "rating": 4.7,
+    "image": "assets/images/products/blender1.jpg",
+    "description": "إسفنجة احترافية لتوزيع المكياج."
+  }
+]

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Medina Beauty | قصتنا</title>
+
+
+<meta name="description" content="تعرف على قصة Medina Beauty، علامة جمال تونسية عصرية">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<link rel="stylesheet" href="assets/css/about.css">
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+<!-- HEADER -->
+
+
+<header class="header">
+
+
+<div class="container nav">
+
+
+<div class="logo">
+
+Medina Beauty
+
+</div>
+
+
+
+
+
+<nav>
+
+
+<a href="index.html" data-lang="home">
+
+الرئيسية
+
+</a>
+
+
+
+<a href="shop.html" data-lang="shop">
+
+المتجر
+
+</a>
+
+
+
+<a href="about.html" data-lang="about">
+
+قصتنا
+
+</a>
+
+
+
+<a href="contact.html" data-lang="contact">
+
+تواصل معنا
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+
+<div class="languages">
+
+
+<button onclick="changeLanguage('ar')">
+
+🇹🇳
+
+</button>
+
+
+<button onclick="changeLanguage('fr')">
+
+🇫🇷
+
+</button>
+
+
+<button onclick="changeLanguage('en')">
+
+🇬🇧
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="icons">
+
+
+<button>
+
+
+⌕
+
+
+</button>
+
+
+<button onclick="location.href='wishlist.html'" aria-label="المفضلة">
+
+
+♡
+
+
+</button>
+
+
+<button onclick="location.href='cart.html'" aria-label="السلة">
+
+
+🛒
+
+
+</button>
+
+
+
+<button class="menu-btn" onclick="openMenu()">
+
+
+☰
+
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<!-- MOBILE MENU -->
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+
+<button onclick="closeMenu()">
+
+×
+
+</button>
+
+
+
+<a href="index.html">
+
+الرئيسية
+
+</a>
+
+
+
+<a href="shop.html">
+
+المتجر
+
+</a>
+
+
+
+<a href="about.html">
+
+قصتنا
+
+</a>
+
+
+
+<a href="contact.html">
+
+تواصل معنا
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- HERO -->
+
+
+<section class="about-hero">
+
+
+<div>
+
+
+<h1>
+
+قصتنا
+
+</h1>
+
+
+<p>
+
+جمال مستوحى من روح تونس 🇹🇳
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- STORY -->
+
+
+<section class="story">
+
+
+<div class="story-container">
+
+
+
+
+
+<div class="story-image">
+
+
+<img src="assets/images/about.jpg" alt="Medina Beauty">
+
+
+</div>
+
+
+
+
+
+
+<div class="story-text">
+
+
+<span>
+
+Medina Beauty
+
+</span>
+
+
+
+
+<h2>
+
+الجمال بروح تونسية عصرية
+
+</h2>
+
+
+
+
+
+<p>
+
+Medina Beauty ليست مجرد متجر تجميل،
+بل هي تجربة تجمع بين الفخامة والجمال الطبيعي.
+
+</p>
+
+
+
+
+<p>
+
+استلهمنا هويتنا من ألوان تونس،
+من الياسمين،
+من البحر الأبيض المتوسط،
+ومن جمال المرأة التونسية.
+
+</p>
+
+
+
+
+
+<p>
+
+هدفنا هو تقديم منتجات مختارة بعناية
+تساعد كل امرأة على الشعور بالثقة والجمال.
+
+</p>
+
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- VALUES -->
+
+
+<section class="values">
+
+
+<div class="title">
+
+
+<span>
+
+قيمنا
+
+</span>
+
+
+
+<h2>
+
+لماذا Medina Beauty؟
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="values-grid">
+
+
+
+
+
+<div class="value-card">
+
+
+🌿
+
+
+<h3>
+
+طبيعي
+
+</h3>
+
+
+<p>
+
+اختيارات تهتم بجمال بشرتك.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="value-card">
+
+
+✨
+
+
+<h3>
+
+فخامة
+
+</h3>
+
+
+<p>
+
+تجربة تسوق راقية.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="value-card">
+
+
+🇹🇳
+
+
+<h3>
+
+هوية تونسية
+
+</h3>
+
+
+<p>
+
+مستوحاة من ثقافتنا.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="value-card">
+
+
+💎
+
+
+<h3>
+
+جودة
+
+</h3>
+
+
+<p>
+
+منتجات مختارة بعناية.
+
+</p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- MISSION -->
+
+
+<section class="mission">
+
+
+<h2>
+
+رؤيتنا
+
+</h2>
+
+
+
+<p>
+
+أن تصبح Medina Beauty من العلامات الرائدة في عالم الجمال في تونس،
+من خلال تقديم منتجات عالية الجودة وتجربة شراء مميزة.
+
+</p>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<a class="whatsapp">
+
+💬
+
+</a>
+
+
+
+
+
+
+
+
+<footer>
+
+
+<h2>
+
+Medina Beauty
+
+</h2>
+
+
+
+<p>
+
+جمال مستوحى من تونس ✨
+
+</p>
+
+
+
+
+<div>
+
+© 2026 Medina Beauty
+
+</div>
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+<script src="assets/js/main.js"></script>
+
+<script src="assets/js/language.js"></script>
+
+
+</body>
+
+
+</html>

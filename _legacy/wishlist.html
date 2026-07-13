@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Medina Beauty | المفضلة</title>
+
+  <meta name="description" content="Wishlist - Medina Beauty">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="stylesheet" href="assets/css/shop.css">
+
+  <style>
+    .page{
+      padding:160px 5% 80px;
+      min-height:100vh;
+      background:var(--cream);
+    }
+    .wishlist-actions{
+      max-width:1200px;
+      margin:0 auto 25px;
+      display:flex;
+      gap:15px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .cart-btn{
+      background:var(--blue);
+      color:#fff;
+      border:none;
+      padding:16px 35px;
+      border-radius:50px;
+      font-weight:bold;
+      box-shadow:var(--shadow);
+    }
+    .empty{
+      max-width:1200px;
+      margin:40px auto;
+      text-align:center;
+      color:var(--blue);
+    }
+    #wishlistToast{
+      display:none;
+      position:fixed;
+      top:90px;
+      left:50%;
+      transform:translateX(-50%);
+      background:var(--blue);
+      color:#fff;
+      padding:12px 20px;
+      border-radius:20px;
+      z-index:99999;
+      box-shadow:var(--shadow);
+    }
+    .wishlist-grid{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:30px;
+    }
+    @media(max-width:1000px){
+      .wishlist-grid{grid-template-columns:repeat(2,1fr);} 
+    }
+    @media(max-width:600px){
+      .wishlist-grid{grid-template-columns:1fr;} 
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="container nav">
+      <div class="logo">Medina Beauty</div>
+
+      <nav>
+        <a href="index.html" data-lang="home">الرئيسية</a>
+        <a href="shop.html" data-lang="shop">المتجر</a>
+        <a href="about.html" data-lang="about">قصتنا</a>
+        <a href="contact.html" data-lang="contact">تواصل معنا</a>
+      </nav>
+
+      <div class="languages">
+        <button onclick="changeLanguage('ar')">🇹🇳</button>
+        <button onclick="changeLanguage('fr')">🇫🇷</button>
+        <button onclick="changeLanguage('en')">🇬🇧</button>
+      </div>
+
+      <div class="icons">
+        <button>⌕</button>
+        <button>♡</button>
+        <button>🛒</button>
+        <button class="menu-btn" onclick="openMenu()">☰</button>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button onclick="closeMenu()">×</button>
+    <a href="index.html">الرئيسية</a>
+    <a href="shop.html">المتجر</a>
+    <a href="about.html">قصتنا</a>
+    <a href="contact.html">تواصل معنا</a>
+  </div>
+
+  <div id="wishlistToast">تم نقل المفضلة إلى السلة ✅</div>
+
+  <main class="page">
+
+    <div class="wishlist-actions">
+      <button class="cart-btn" onclick="moveWishlistToCart()">إضافة كل المفضلة إلى السلة</button>
+    </div>
+
+    <div id="wishlistGrid" class="wishlist-grid"></div>
+
+    <div id="wishlistEmpty" class="empty" style="display:none;">
+      لا توجد منتجات في المفضلة.
+    </div>
+
+  </main>
+
+  <footer>
+    <h2>Medina Beauty</h2>
+    <p>جمال مستوحى من تونس ✨</p>
+    <div>© 2026 Medina Beauty</div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/language.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+
+  <script>
+    const grid = document.getElementById('wishlistGrid');
+    const emptyEl = document.getElementById('wishlistEmpty');
+
+    async function loadWishlistUI(){
+      const items = JSON.parse(localStorage.getItem('wishlist') || '[]');
+      const wishlistIds = new Set((items||[]).map(x=>Number(x.id)));
+
+      const res = await fetch('data/products.json');
+      const products = await res.json();
+
+      const wishlistProducts = products.filter(p=>wishlistIds.has(Number(p.id)));
+
+      grid.innerHTML = '';
+      if(!wishlistProducts.length){
+        emptyEl.style.display = 'block';
+        return;
+      }
+      emptyEl.style.display = 'none';
+
+      wishlistProducts.forEach(p=>{
+        grid.innerHTML += `
+          <div class="product-card">
+            <div class="product-image">
+              <img src="${p.image}" alt="${p.name}">
+            </div>
+            <div class="product-info">
+              <span class="category">${p.category}</span>
+              <h3>${p.name}</h3>
+              <div class="price">${p.price} DT</div>
+              <div class="rating">⭐ ${p.rating}</div>
+              <a href="product.html?id=${p.id}" class="view-product">عرض المنتج</a>
+              <button style="margin-top:12px;width:100%;border:none;background:transparent;color:var(--blue);font-weight:bold;" onclick="removeFromWishlist(${p.id})">إزالة من المفضلة</button>
+              <button style="margin-top:8px;width:100%;border:none;background:var(--gold);color:#fff;font-weight:bold;padding:12px 15px;border-radius:50px;box-shadow:var(--shadow);" onclick="addToCart(${p.id},1);">إضافة للسلة</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      loadWishlistUI();
+      // keep count fresh
+      if(typeof window.renderWishlistCount === 'function') window.renderWishlistCount();
+    });
+
+  </script>
+
+</body>
+
+</html>
+

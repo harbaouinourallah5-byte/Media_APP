@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Medina Beauty | السلة</title>
+
+  <meta name="description" content="Cart - Medina Beauty">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="stylesheet" href="assets/css/shop.css">
+
+  <style>
+    .page{
+      padding:160px 5% 80px;
+      min-height:100vh;
+      background:var(--cream);
+    }
+    .cart-wrap{
+      max-width:1200px;
+      margin:0 auto;
+    }
+    #cartEmpty{
+      text-align:center;
+      margin-top:60px;
+      color:var(--blue);
+      display:none;
+    }
+    .cart-actions{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      flex-wrap:wrap;
+      margin:0 auto 25px;
+    }
+    .btn{
+      border:none;
+      background:var(--blue);
+      color:#fff;
+      padding:16px 35px;
+      border-radius:50px;
+      font-weight:bold;
+      box-shadow:var(--shadow);
+    }
+    .btn.secondary{
+      background:var(--gold);
+    }
+    .cart-table{
+      width:100%;
+      background:#fff;
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .cart-row{
+      display:grid;
+      grid-template-columns: 1.2fr .7fr .8fr 0.7fr;
+      gap:10px;
+      padding:20px;
+      align-items:center;
+      border-bottom:1px solid #eee;
+    }
+    .cart-row.header{
+      background:linear-gradient(135deg, rgba(18,59,102,.92), rgba(18,59,102,.55));
+      color:#fff;
+      font-weight:bold;
+      border-bottom:none;
+    }
+    .cart-row .thumb{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+    .cart-row img{ width:80px; height:80px; object-fit:cover; border-radius:18px; }
+    .qty-controls{ display:flex; align-items:center; gap:10px; }
+    .qty-controls button{
+      width:40px; height:40px; border:none; border-radius:50%; background:var(--blue); color:#fff; font-size:20px;
+    }
+    .qty-controls span{ font-weight:bold; min-width:28px; text-align:center; }
+    .sum{ font-weight:bold; color:var(--gold); font-size:22px; }
+    @media(max-width:800px){
+      .cart-row{ grid-template-columns: 1fr 1fr; }
+      .cart-row.header{ display:none; }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container nav">
+      <div class="logo">Medina Beauty</div>
+      <nav>
+        <a href="index.html" data-lang="home">الرئيسية</a>
+        <a href="shop.html" data-lang="shop">المتجر</a>
+        <a href="about.html" data-lang="about">قصتنا</a>
+        <a href="contact.html" data-lang="contact">تواصل معنا</a>
+      </nav>
+      <div class="languages">
+        <button onclick="changeLanguage('ar')">🇹🇳</button>
+        <button onclick="changeLanguage('fr')">🇫🇷</button>
+        <button onclick="changeLanguage('en')">🇬🇧</button>
+      </div>
+      <div class="icons">
+        <button>⌕</button>
+        <button>♡</button>
+        <button>🛒</button>
+        <button class="menu-btn" onclick="openMenu()">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button onclick="closeMenu()">×</button>
+    <a href="index.html">الرئيسية</a>
+    <a href="shop.html">المتجر</a>
+    <a href="about.html">قصتنا</a>
+    <a href="contact.html">تواصل معنا</a>
+  </div>
+
+  <main class="page">
+    <div class="cart-wrap">
+      <div class="cart-actions">
+        <button class="btn" onclick="cartCheckoutWhatsapp()">تأكيد الطلب عبر واتساب 💬</button>
+        <button class="btn secondary" onclick="clearCartInline()">تفريغ السلة</button>
+      </div>
+
+      <div class="cart-table" id="cartTable" style="display:none;">
+        <div class="cart-row header">
+          <div>المنتج</div>
+          <div>الكمية</div>
+          <div>المجموع</div>
+          <div></div>
+        </div>
+        <div id="cartRows"></div>
+      </div>
+
+      <div id="cartEmpty">سلتك فارغة حالياً.</div>
+    </div>
+  </main>
+
+  <footer>
+    <h2>Medina Beauty</h2>
+    <p>جمال مستوحى من تونس ✨</p>
+    <div>© 2026 Medina Beauty</div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/language.js"></script>
+  <script src="assets/js/cart.js"></script>
+
+  <script>
+    const cartRowsEl = document.getElementById('cartRows');
+    const cartTableEl = document.getElementById('cartTable');
+    const cartEmptyEl = document.getElementById('cartEmpty');
+
+    function getItems(){
+      return (typeof window.getCart === 'function') ? window.getCart() : [];
+    }
+
+    function setItems(items){
+      // cart.js uses localStorage with key "cart"; no direct setter exported.
+      // We'll update via addToCart/clearCart? easier: use localStorage directly.
+      localStorage.setItem('cart', JSON.stringify(items));
+    }
+
+    function updateQty(productId, delta){
+      const items = getItems();
+      const id = Number(productId);
+      const it = items.find(x => Number(x.id) === id);
+      if(!it) return;
+      it.quantity = Math.max(1, (Number(it.quantity) || 1) + Number(delta));
+      setItems(items);
+      renderCart();
+    }
+
+    function removeFromCart(productId){
+      const items = getItems().filter(x => Number(x.id) !== Number(productId));
+      setItems(items);
+      renderCart();
+    }
+
+    async function renderCart(){
+      const items = getItems();
+      cartRowsEl.innerHTML = '';
+
+      if(!items || items.length === 0){
+        cartTableEl.style.display = 'none';
+        cartEmptyEl.style.display = 'block';
+        return;
+      }
+
+      cartEmptyEl.style.display = 'none';
+      cartTableEl.style.display = 'block';
+
+      const res = await fetch('data/products.json');
+      const products = await res.json();
+      const map = new Map(products.map(p => [Number(p.id), p]));
+
+      let total = 0;
+
+      items.forEach(it => {
+        const p = map.get(Number(it.id));
+        if(!p) return;
+        const qty = Number(it.quantity) || 1;
+        const rowSum = Number(p.price) * qty;
+        total += rowSum;
+
+        cartRowsEl.innerHTML += `
+          <div class="cart-row">
+            <div class="thumb">
+              <img src="${p.image}" alt="${p.name}">
+              <div>
+                <div style="font-weight:bold;color:var(--blue);">${p.name}</div>
+                <div style="color:#666;margin-top:6px;">${p.category}</div>
+              </div>
+            </div>
+            <div>
+              <div class="qty-controls">
+                <button onclick="updateQty(${p.id},-1)">−</button>
+                <span>${qty}</span>
+                <button onclick="updateQty(${p.id},1)">+</button>
+              </div>
+            </div>
+            <div class="sum">${rowSum} DT</div>
+            <div>
+              <button onclick="removeFromCart(${p.id})" style="border:none;background:transparent;color:#c00;font-size:18px;">✕</button>
+            </div>
+          </div>
+        `;
+      });
+
+      cartRowsEl.innerHTML += `
+        <div class="cart-row" style="background:#fafafa;">
+          <div style="font-weight:bold;color:var(--blue);">المجموع النهائي</div>
+          <div></div>
+          <div class="sum" id="cartTotal">${total} DT</div>
+          <div></div>
+        </div>
+      `;
+    }
+
+    function clearCartInline(){
+      if(typeof window.clearCart === 'function') window.clearCart();
+      else localStorage.setItem('cart','[]');
+      renderCart();
+    }
+
+    window.updateQty = updateQty;
+    window.removeFromCart = removeFromCart;
+    window.clearCartInline = clearCartInline;
+
+    window.cartCheckoutWhatsapp = async function(){
+      const items = getItems();
+      if(!items || items.length===0){
+        alert('السلة فارغة');
+        return;
+      }
+
+      const name = prompt('الاسم الكامل');
+      const phone = prompt('رقم الهاتف');
+      if(!name || !phone){
+        alert('أدخل الاسم والهاتف');
+        return;
+      }
+
+      const res = await fetch('data/products.json');
+      const products = await res.json();
+      const map = new Map(products.map(p => [Number(p.id), p]));
+
+      let total = 0;
+      const lines = items.map(it => {
+        const p = map.get(Number(it.id));
+        if(!p) return '';
+        const qty = Number(it.quantity)||1;
+        const sum = Number(p.price)*qty;
+        total += sum;
+        return `• ${p.name} x${qty} = ${sum} DT`;
+      }).filter(Boolean);
+
+      const whatsappNumber = 'XXXXXXXXXXX';
+      const message = `مرحباً Medina Beauty 🌿\n\nأريد تأكيد طلب من السلة:\n\n${lines.join('\n')}\n\n💰 المجموع: ${total} DT\n\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n\nشكراً ❤️`;
+
+      window.open(
+        'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message)
+      );
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+
+</body>
+
+</html>
+
