@@ -11,6 +11,9 @@ import { AddToCartButton } from '@/components/AddToCartButton';
 import { RedeemPointsButton } from '@/components/RedeemPointsButton';
 import { ProductReviews } from '@/components/ProductReviews';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 async function getProduct(id: string) {

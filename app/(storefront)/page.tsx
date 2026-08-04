@@ -5,6 +5,9 @@ import { ProductCard } from '@/components/ProductCard';
 import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getFeaturedProducts() {
   try {
     await dbConnect();
