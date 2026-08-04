@@ -16,16 +16,19 @@ const fixImages = async () => {
     await mongoose.connect(process.env.MONGODB_URI);
     
     const images = [
+      '/trousse.jpg',
       '/products/pink-kit/media_1785883976716.jpg',
       '/products/pink-kit/media_1785883976718.jpg',
       '/products/pink-kit/media_1785877762618.jpg',
       '/products/pink-kit/media_1785877762621.jpg',
       '/products/pink-kit/media_1785877762625.jpg',
       '/products/pink-kit/media_1785877762815.jpg',
+      '/products/pink-kit/media_1785885154910.jpg',
+      '/products/pink-kit/media_1785885154922.jpg',
     ];
 
     const result = await Product.updateMany(
-      { name: { $regex: /Medina Beauty.*Pink Essentials/i } },
+      { name: { $regex: /Pink Essentials/i } },
       { 
         $set: { 
           image: images[0],
