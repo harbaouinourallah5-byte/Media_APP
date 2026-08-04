@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Package, Users, MessageSquare, AlertTriangle } from 'lucide-react';
+import { Package, Users, MessageSquare, AlertTriangle, TrendingUp } from 'lucide-react';
 import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
 import User from '@/models/User';

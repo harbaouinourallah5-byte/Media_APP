@@ -14,8 +14,8 @@ const Product = mongoose.models.Product || mongoose.model('Product', ProductSche
 const checkImages = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    const p = await Product.findOne({ name: /Pink Essentials/i });
-    console.log(JSON.stringify(p.images, null, 2));
+    const products = await Product.find({});
+    console.log(products.map(p => ({ id: p._id, name: p.name, image: p.image })));
     process.exit(0);
   } catch (error) {
     console.error("Failed:", error);
