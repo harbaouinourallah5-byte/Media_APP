@@ -16,7 +16,7 @@ const fixImages = async () => {
     await mongoose.connect(process.env.MONGODB_URI);
     
     const images = [
-      '/products/pink-kit/media_1785885348604.jpg',
+      '/products/pink-kit/media_1785886868636.jpg', // New Face Photo
       '/products/pink-kit/media_1785886067461.jpg',
       '/products/pink-kit/media_1785886066740.jpg',
       '/products/pink-kit/media_1785886066640.jpg',

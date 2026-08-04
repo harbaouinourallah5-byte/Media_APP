@@ -20,7 +20,7 @@ async function getFeaturedProducts() {
           description: 'Une magnifique trousse transparente rose contenant 5 essentiels : Concealer, Blush, Gloss, Mascara et Contour des Lèvres. En bonus : un mini parfum en cadeau !',
           price: 45, 
           category: 'Makeup', 
-          image: '/products/pink-kit/media_1785885348604.jpg',
+          image: '/products/pink-kit/media_1785886868636.jpg',
           stock: 1
         }
       ];
