@@ -86,7 +86,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
                 <CarouselContent>
                   {product.images.map((img: string, idx: number) => (
                     <CarouselItem key={idx}>
-                      <div className="relative aspect-square rounded-3xl overflow-hidden bg-muted">
+                      <div className="relative aspect-square rounded-3xl overflow-hidden bg-muted" style={{ position: 'relative' }}>
                         <Image 
                           src={img} 
                           alt={`${product.name} - Image ${idx + 1}`} 
