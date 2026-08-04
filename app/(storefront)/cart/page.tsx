@@ -1,20 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/store/useCart';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Minus, Plus, Trash2, ArrowRight, Star } from 'lucide-react';
+import { Minus, Plus, Trash2, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Cart() {
   const { items, updateQuantity, removeItem, totalPrice } = useCart();
-  const [rating, setRating] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const baseTotal = totalPrice();
-  const discountAmount = rating > 0 ? baseTotal * 0.05 : 0;
-  const finalTotal = baseTotal - discountAmount;
+  const finalTotal = baseTotal;
+
+  if (!mounted) return null;
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -73,48 +79,12 @@ export default function Cart() {
                       <span>Shipping</span>
                       <span className="text-primary font-medium">Free (COD)</span>
                     </div>
-                    {rating > 0 && (
-                      <div className="flex justify-between text-green-600 font-medium">
-                        <span>Rating Discount (5%)</span>
-                        <span>-${discountAmount.toFixed(2)}</span>
-                      </div>
-                    )}
                     <div className="border-t border-border pt-4 flex justify-between font-bold text-lg">
                       <span>Total</span>
                       <span>${finalTotal.toFixed(2)}</span>
                     </div>
                   </div>
 
-                  {/* Rating Block */}
-                  <div className="mt-6 p-4 bg-muted/50 rounded-xl border border-border/50">
-                    <h4 className="font-heading font-semibold text-sm mb-2 text-center">
-                      Rate your shopping experience to get 5% OFF!
-                    </h4>
-                    <div className="flex justify-center gap-1">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <button
-                          key={star}
-                          type="button"
-                          onClick={() => setRating(star)}
-                          className="focus:outline-none transition-transform hover:scale-110"
-                        >
-                          <Star
-                            className={`h-6 w-6 ${
-                              rating >= star
-                                ? 'fill-yellow-400 text-yellow-400'
-                                : 'text-muted-foreground hover:text-yellow-400/50'
-                            }`}
-                          />
-                        </button>
-                      ))}
-                    </div>
-                    {rating > 0 && (
-                      <p className="text-xs text-green-600 text-center mt-2 font-medium animate-in fade-in slide-in-from-bottom-2">
-                        Thanks for your feedback! 5% discount applied.
-                      </p>
-                    )}
-                  </div>
-                  
                   <div className="mt-8 pt-8 border-t border-border/50">
                     <Link href="/checkout">
                       <Button className="w-full h-14 rounded-xl text-lg group mt-4">

@@ -13,6 +13,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [failedAttempts, setFailedAttempts] = useState(0);
   const { login } = useAuth();
   const router = useRouter();
 
@@ -34,7 +35,15 @@ export default function Login() {
         login(data.user);
         router.push(data.user.isAdmin ? '/admin' : '/');
       } else {
-        toast.error(data.message || 'Login failed');
+        const newAttempts = failedAttempts + 1;
+        setFailedAttempts(newAttempts);
+        
+        if (newAttempts >= 3) {
+          toast.error('Too many failed attempts. Please reset your password.');
+          router.push('/forgot-password');
+        } else {
+          toast.error(data.message || 'Login failed');
+        }
       }
     } catch (error) {
       toast.error('An error occurred during login');
@@ -95,6 +104,12 @@ export default function Login() {
               </Button>
             </div>
           </form>
+          
+          <div className="flex items-center justify-center mt-4">
+            <Link href="/forgot-password" className="text-sm font-medium text-primary hover:text-primary/80">
+              Forgot your password?
+            </Link>
+          </div>
         </div>
     </div>
   );

@@ -68,7 +68,6 @@ export function RedeemPointsButton({
         toast.success(`🎉 You successfully redeemed ${product.name}!`);
         setIsOpen(false);
         
-        // Open WhatsApp
         let msg = `*🎉 REWARD CLAIMED!* 🎁\n\n`;
         msg += `*Customer:* ${user.name}\n`;
         msg += `*Phone:* ${phone}\n`;
@@ -76,9 +75,16 @@ export function RedeemPointsButton({
         msg += `*Reward:* ${product.name}\n`;
         msg += `*Points Used:* ${product.pointsCost}\n`;
         msg += `*Total to pay:* 0 DT + Shipping`;
+
+        // Copy the text for the user so they can paste it in Messenger
+        try {
+          await navigator.clipboard.writeText(msg);
+          toast.success("Reward details copied! Please paste them in the Messenger chat to confirm.", { duration: 6000 });
+        } catch (e) {
+          console.error("Failed to copy text", e);
+        }
         
-        const encoded = encodeURIComponent(msg);
-        window.open(`https://wa.me/21652612052?text=${encoded}`, '_blank');
+        window.open(`https://m.me/61591538024777`, '_blank');
       } else {
         toast.error(data.message || "Failed to redeem points");
       }

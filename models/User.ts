@@ -6,6 +6,8 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
   points: { type: Number, default: 0 },
+  resetCode: { type: String, default: null },
+  resetCodeExpiry: { type: Date, default: null },
 }, { timestamps: true });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

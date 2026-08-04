@@ -9,8 +9,26 @@ import Product from '@/models/Product';
 import { notFound } from 'next/navigation';
 import { AddToCartButton } from '@/components/AddToCartButton';
 import { RedeemPointsButton } from '@/components/RedeemPointsButton';
+import { ProductReviews } from '@/components/ProductReviews';
 
 async function getProduct(id: string) {
+  if (id === '1') {
+    return {
+      _id: '1',
+      name: 'Trousse de maquillage',
+      description: 'Une magnifique trousse transparente rose contenant 5 essentiels : Concealer, Blush, Gloss, Mascara et Contour des Lèvres. En bonus : un mini parfum en cadeau !',
+      price: 45,
+      discount: 0,
+      category: 'Makeup',
+      image: '/trousse.jpg',
+      stock: 10,
+      pointsCost: 0,
+      rating: 5,
+      numReviews: 0,
+      reviews: []
+    };
+  }
+
   try {
     await dbConnect();
     const product = await Product.findById(id).lean();
@@ -24,7 +42,10 @@ async function getProduct(id: string) {
       category: product.category,
       image: product.image,
       stock: product.stock,
-      pointsCost: product.pointsCost || 0
+      pointsCost: product.pointsCost || 0,
+      rating: product.rating || 0,
+      numReviews: product.numReviews || 0,
+      reviews: product.reviews || []
     };
   } catch (error) {
     return null;
@@ -70,10 +91,13 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
               <div className="flex items-center gap-2 mb-6">
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
+                    <Star 
+                      key={i} 
+                      className={`h-4 w-4 ${i < Math.round(product.rating) ? 'fill-current' : 'text-muted-foreground fill-transparent'}`} 
+                    />
                   ))}
                 </div>
-                <span className="text-sm text-muted-foreground">(128 reviews)</span>
+                <span className="text-sm text-muted-foreground">({product.numReviews} reviews)</span>
               </div>
               
               <div className="flex items-center gap-4 mb-6">
@@ -149,6 +173,11 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* Reviews Section */}
+          <div className="mt-20">
+            <ProductReviews productId={product._id} initialReviews={product.reviews} />
           </div>
         </div>
       </main>

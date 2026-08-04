@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/store/useAuth';
 import { Button } from '@/components/ui/button';
@@ -14,28 +14,67 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
+  
+  // Math Challenge State
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [mathAnswer, setMathAnswer] = useState('');
+  
   const { login } = useAuth();
   const router = useRouter();
 
+  // Generate random math challenge on load
+  useEffect(() => {
+    setNum1(Math.floor(Math.random() * 10) + 1);
+    setNum2(Math.floor(Math.random() * 10) + 1);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Client-side Bot Checks
+    if (honeypot.trim() !== '') {
+      toast.error('Bot detected.');
+      return;
+    }
+    
+    if (parseInt(mathAnswer) !== (num1 + num2)) {
+      toast.error('Incorrect security check answer.');
+      return;
+    }
+
     setLoading(true);
     
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, honeypot }),
       });
       
       const data = await res.json();
       
       if (res.ok) {
-        toast.success('Account created successfully!');
+        toast.success('Account created successfully! You earned 1 Point 💎');
         login(data.user);
         router.push('/');
       } else {
-        toast.error(data.message || 'Registration failed');
+        if (data.message === 'Email already exists') {
+          toast.error(
+            <div className="flex flex-col gap-2">
+              <span className="font-bold text-base">This email is already registered!</span>
+              <Link href="/login">
+                <Button variant="default" size="sm" className="w-fit mt-1">
+                  Go to Sign In
+                </Button>
+              </Link>
+            </div>,
+            { duration: 6000 }
+          );
+        } else {
+          toast.error(data.message || 'Registration failed');
+        }
       }
     } catch (error) {
       toast.error('An error occurred during registration');
@@ -99,6 +138,34 @@ export default function Signup() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="h-12"
                   placeholder="••••••••"
+                />
+              </div>
+              
+              {/* Security Verification */}
+              <div className="space-y-2 pt-4 border-t">
+                <Label htmlFor="math-answer">Security Check: What is {num1} + {num2}?</Label>
+                <Input
+                  id="math-answer"
+                  type="number"
+                  required
+                  value={mathAnswer}
+                  onChange={(e) => setMathAnswer(e.target.value)}
+                  className="h-12"
+                  placeholder="Enter the sum"
+                />
+              </div>
+
+              {/* Honeypot Field (Hidden from real users) */}
+              <div className="opacity-0 absolute top-0 left-0 h-0 w-0 z-[-1]">
+                <Label htmlFor="website_url_99">Leave this field empty</Label>
+                <Input
+                  id="website_url_99"
+                  name="website_url_99"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
                 />
               </div>
             </div>

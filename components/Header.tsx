@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/store/useCart';
 import { useAuth } from '@/store/useAuth';
@@ -31,40 +32,63 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-4 lg:hidden">
-          <Sheet>
-            <SheetTrigger render={<Button variant="ghost" size="icon" />}>
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle menu</span>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-6 mt-10">
-                {routes.map((route) => (
-                  <Link
-                    key={route.href}
-                    href={route.href}
-                    className={`text-lg font-medium transition-colors hover:text-primary ${
-                      pathname === route.href ? 'text-primary' : 'text-foreground/80'
-                    }`}
-                  >
-                    {route.label}
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-2 lg:gap-8">
+        {/* Left Side: Mobile Menu, Logo, Theme Toggle */}
+        <div className="flex items-center gap-4 lg:w-[250px]">
+          <div className="lg:hidden">
+            <Sheet>
+              <SheetTrigger render={<Button variant="ghost" size="icon" />}>
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle menu</span>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-6 mt-10">
+                  {routes.map((route) => (
+                    <Link
+                      key={route.href}
+                      href={route.href}
+                      className={`text-lg font-medium transition-colors hover:text-primary ${
+                        pathname === route.href ? 'text-primary' : 'text-foreground/80'
+                      }`}
+                    >
+                      {route.label}
+                    </Link>
+                  ))}
+                  <div className="pt-4">
+                    <ThemeToggle />
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
 
-        <div className="flex-1 lg:flex-none flex justify-center lg:justify-start">
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-heading font-bold text-2xl tracking-wide text-primary">
+            <div className="relative h-10 w-32 sm:h-12 sm:w-40">
+              {/* Light Mode Logo */}
+              <img 
+                src="/logo-light.jpg" 
+                alt="Medina Beauty Logo" 
+                className="absolute inset-0 h-full w-full object-cover dark:hidden rounded-lg shadow-sm"
+              />
+              {/* Dark Mode Logo */}
+              <img 
+                src="/logo-dark.jpg" 
+                alt="Medina Beauty Logo" 
+                className="absolute inset-0 h-full w-full object-cover hidden dark:block rounded-lg shadow-sm"
+              />
+            </div>
+            <span className="sr-only">
               Medina Beauty
             </span>
           </Link>
+          
+          <div className="hidden lg:block">
+            <ThemeToggle />
+          </div>
         </div>
 
-        <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+        {/* Center: Desktop Navigation */}
+        <nav className="hidden lg:flex flex-1 justify-center items-center gap-8">
           {routes.map((route) => (
             <Link
               key={route.href}
@@ -78,8 +102,9 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 lg:gap-4">
-          <form className="hidden sm:flex relative items-center" onSubmit={(e) => {
+        {/* Right Side: Search, Account, Cart */}
+        <div className="flex items-center justify-end gap-2 lg:gap-4 lg:w-[350px]">
+          <form className="hidden xl:flex relative items-center" onSubmit={(e) => {
             e.preventDefault();
             const formData = new FormData(e.currentTarget);
             const query = formData.get('query');
@@ -90,13 +115,14 @@ export function Header() {
             <Input 
               name="query" 
               placeholder="Search..." 
-              className="h-9 w-32 lg:w-48 bg-muted/50 border-none pr-8 focus-visible:ring-1 transition-all rounded-full" 
+              className="h-9 w-32 xl:w-48 bg-muted/50 border-none pr-8 focus-visible:ring-1 transition-all rounded-full" 
             />
             <Button type="submit" variant="ghost" size="icon" className="absolute right-0 h-9 w-9 rounded-full">
               <Search className="h-4 w-4" />
               <span className="sr-only">Search</span>
             </Button>
           </form>
+
           {mounted && user?.isAdmin && (
             <Link href="/admin">
               <Button variant="ghost" size="icon">
@@ -105,6 +131,7 @@ export function Header() {
               </Button>
             </Link>
           )}
+
           <div className="flex items-center gap-2">
             {mounted && user ? (
               <>
@@ -116,7 +143,7 @@ export function Header() {
                     <DialogHeader>
                       <DialogTitle>Loyalty Points Rules 💎</DialogTitle>
                       <DialogDescription>
-                        Earn points and redeem them for free products!
+                        Earn points and redeem them for free products and discounts!
                       </DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
@@ -124,31 +151,43 @@ export function Header() {
                         <h4 className="font-semibold text-sm">How to earn points:</h4>
                         <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
                           <li><strong>Sign Up:</strong> 1 Point</li>
-                          <li><strong>Make a Purchase:</strong> 1 Point for every 1 DT spent!</li>
-                          <li><em>More rules coming soon!</em></li>
+                          <li><strong>Make a Purchase:</strong> 1 Point for every 5 DT spent!</li>
+                          <li><strong>Follow us on Instagram/TikTok:</strong> 1 Point!</li>
                         </ul>
                       </div>
                       <div className="space-y-2 pt-2 border-t">
                         <h4 className="font-semibold text-sm">How to spend points:</h4>
-                        <p className="text-sm text-muted-foreground">
-                          When you view a product, if you have enough points, a "Redeem for Free" button will appear!
-                        </p>
+                        <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
+                          <li><strong>Free Product:</strong> When you view a product, if you have enough points, a "Redeem for Free" button will appear!</li>
+                          <li><strong>The 20% Off Coupon 🎟️:</strong> Redeem 15 points to unlock a secret 20% off discount code!</li>
+                        </ul>
                       </div>
                     </div>
                   </DialogContent>
                 </Dialog>
-                <Button variant="ghost" className="font-medium hidden sm:block" onClick={logout}>
+              <Link href="/profile" className="hidden md:block">
+                <Button variant="outline" className="flex border-primary/20 hover:bg-primary/5">
+                  My Account
+                </Button>
+              </Link>
+                <Button variant="ghost" className="font-medium hidden sm:block text-destructive hover:text-destructive hover:bg-destructive/10" onClick={logout}>
                   Logout
                 </Button>
               </>
             ) : (
-              <Link href="/login" className="hidden lg:block">
-                <Button variant="ghost" className="font-medium">Sign In</Button>
-              </Link>
+              <div className="hidden md:flex items-center gap-2">
+                <Link href="/login">
+                  <Button variant="ghost" className="font-medium">Sign In</Button>
+                </Link>
+                <Link href="/signup">
+                  <Button className="font-medium">Sign Up</Button>
+                </Link>
+              </div>
             )}
           </div>
+          
           <Link href="/cart">
-            <Button variant="ghost" size="icon" className="relative">
+            <Button variant="ghost" size="icon" className="relative ml-2">
               <ShoppingBag className="h-5 w-5" />
               {mounted && totalItems() > 0 && (
                 <span className="absolute top-1 right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center">

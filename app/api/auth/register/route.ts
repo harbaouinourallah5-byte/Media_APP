@@ -5,7 +5,12 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(req: Request) {
   try {
-    const { name, email, password } = await req.json();
+    const { name, email, password, honeypot } = await req.json();
+
+    // Server-side Bot Check
+    if (honeypot && honeypot.trim() !== '') {
+      return NextResponse.json({ message: 'Bot detected' }, { status: 400 });
+    }
 
     if (!name || !email || !password) {
       return NextResponse.json({ message: 'All fields are required' }, { status: 400 });

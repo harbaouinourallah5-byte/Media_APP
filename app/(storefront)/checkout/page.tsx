@@ -11,7 +11,7 @@ import { useCart } from '@/store/useCart';
 import { toast } from 'sonner';
 import { ShoppingBag, Truck, ShieldCheck, ArrowRight } from 'lucide-react';
 
-const SHIPPING_FEE = 7.00;
+const SHIPPING_FEE = 0.00;
 const WHATSAPP_NUMBER = "21652612052"; // Removed the + for the wa.me link
 
 export default function CheckoutPage() {
@@ -59,28 +59,44 @@ export default function CheckoutPage() {
     orderDetails += `*Shipping:* $${SHIPPING_FEE.toFixed(2)}\n`;
     orderDetails += `*TOTAL TO COLLECT:* $${total.toFixed(2)}`;
 
-    // Award loyalty points if logged in
-    if (user) {
-      const pointsEarned = Math.floor(total);
-      try {
-        await fetch('/api/users/add-points', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: user.id, pointsToAdd: pointsEarned })
-        });
-        updatePoints(pointsEarned);
-        toast.success(`🎉 You just earned ${pointsEarned} Loyalty Points!`);
-      } catch (err) {
-        console.error("Failed to add points", err);
+    const pointsEarned = Math.floor(total / 5);
+
+    // Save order to database for admin tracking and points approval
+    try {
+      await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user: user?.id,
+          customerName: `${formData.get('firstName')} ${formData.get('lastName')}`,
+          email: user?.email || 'guest@example.com',
+          address: `${formData.get('address')}, ${formData.get('state')}`,
+          items: items.map(i => ({ product: i.id, name: i.name, price: i.price, quantity: i.quantity })),
+          totalPrice: total,
+          pointsEarned: user ? pointsEarned : 0,
+          pointsStatus: user ? 'pending' : 'none'
+        })
+      });
+
+      if (user) {
+        toast.success(`Order placed! ${pointsEarned} Points are pending admin approval.`);
       }
+    } catch (err) {
+      console.error("Failed to save order", err);
     }
 
-    // Encode the text for the URL
-    const encodedMessage = encodeURIComponent(orderDetails);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    // Copy the text for the user so they can paste it in Messenger
+    try {
+      await navigator.clipboard.writeText(orderDetails);
+      toast.success("Order details copied! Please paste them in the Messenger chat to confirm your order.", { duration: 6000 });
+    } catch (e) {
+      console.error("Failed to copy text", e);
+    }
+    
+    const messengerUrl = `https://m.me/61591538024777`;
 
-    // Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank');
+    // Open Messenger in a new tab
+    window.open(messengerUrl, '_blank');
 
     // Clear cart and go back home
     clearCart();
@@ -198,7 +214,7 @@ export default function CheckoutPage() {
                 disabled={isSubmitting}
                 className="w-full h-14 text-lg rounded-xl flex items-center gap-2"
               >
-                {isSubmitting ? "Processing..." : "Order via WhatsApp"}
+                {isSubmitting ? "Processing..." : "Order via Messenger"}
                 {!isSubmitting && <ArrowRight className="h-5 w-5" />}
               </Button>
             </div>

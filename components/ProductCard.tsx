@@ -15,6 +15,7 @@ interface Product {
   discount?: number;
   category: string;
   image: string;
+  stock?: number;
 }
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
@@ -58,22 +59,32 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             Sale {discount}% Off
           </div>
         )}
+
+        {product.stock !== undefined && (
+          <div className={`absolute top-4 left-4 z-10 px-2 py-1 text-xs font-bold uppercase tracking-wider rounded shadow-sm ${product.stock > 0 ? 'bg-green-600 text-white' : 'bg-secondary text-secondary-foreground'}`}>
+            {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+          </div>
+        )}
         
         {/* Hover Actions */}
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-20 pointer-events-none">
-          <Button variant="secondary" size="icon" className="rounded-full h-10 w-10 hover:scale-110 transition-transform pointer-events-auto" onClick={handleAddToCart}>
+          <Button type="button" variant="secondary" size="icon" className="rounded-full h-10 w-10 hover:scale-110 transition-transform pointer-events-auto" onClick={handleAddToCart}>
             <ShoppingBag className="h-4 w-4" />
             <span className="sr-only">Add to cart</span>
           </Button>
-          <Button variant="secondary" size="icon" className="rounded-full h-10 w-10 hover:scale-110 transition-transform pointer-events-auto" nativeButton={false} render={<Link href={`/product/${product._id}`} />}>
-            <Eye className="h-4 w-4" />
-            <span className="sr-only">Quick view</span>
-          </Button>
+          <Link href={`/product/${product._id}`}>
+            <Button type="button" variant="secondary" size="icon" className="rounded-full h-10 w-10 hover:scale-110 transition-transform pointer-events-auto" tabIndex={-1}>
+              <Eye className="h-4 w-4" />
+              <span className="sr-only">Quick view</span>
+            </Button>
+          </Link>
         </div>
       </div>
       
       <div className="p-4 flex flex-col flex-1">
-        <div className="text-xs text-muted-foreground mb-1 uppercase tracking-wider font-medium">{product.category}</div>
+        <div className="flex justify-between items-start mb-1">
+          <div className="text-xs text-muted-foreground uppercase tracking-wider font-medium">{product.category}</div>
+        </div>
         <h3 className="font-heading font-semibold text-lg mb-2 line-clamp-1 group-hover:text-primary transition-colors">
           <Link href={`/product/${product._id}`} className="hover:underline">
             {product.name}

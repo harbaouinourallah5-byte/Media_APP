@@ -10,6 +10,15 @@ export interface IProduct {
   stock: number;
   featured: boolean;
   pointsCost?: number;
+  rating?: number;
+  numReviews?: number;
+  reviews?: Array<{
+    user: any;
+    name: string;
+    rating: number;
+    comment: string;
+    createdAt?: Date;
+  }>;
 }
 
 const ProductSchema = new mongoose.Schema({
@@ -22,6 +31,15 @@ const ProductSchema = new mongoose.Schema({
   stock: { type: Number, required: true, default: 0 },
   featured: { type: Boolean, default: false },
   pointsCost: { type: Number, default: 0 },
+  rating: { type: Number, default: 0 },
+  numReviews: { type: Number, default: 0 },
+  reviews: [{
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
+  }],
 }, {
   timestamps: true,
 });

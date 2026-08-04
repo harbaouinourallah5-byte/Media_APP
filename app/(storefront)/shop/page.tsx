@@ -17,14 +17,17 @@ async function getProducts(query?: string, category?: string) {
 
     const products = await Product.find(filter).sort({ createdAt: -1 }).lean();
     
-    if (products.length === 0 && !query && (!category || category === 'All Products')) {
+    if (products.length === 0 && !query && (!category || category === 'All Products' || category === 'Makeup')) {
       return [
-        { _id: '1', name: 'Luminous Glow Serum', price: 65, category: 'Skincare', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800' },
-        { _id: '2', name: 'Mediterranean Rose Water', price: 32, category: 'Toner', image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=800' },
-        { _id: '3', name: 'Velvet Matte Lipstick', price: 28, category: 'Makeup', image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&q=80&w=800' },
-        { _id: '4', name: 'Golden Sands Bronzer', price: 45, category: 'Makeup', image: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=800' },
-        { _id: '5', name: 'Olive Oil Hair Mask', price: 38, category: 'Haircare', image: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=800' },
-        { _id: '6', name: 'Jasmine Bloom Perfume', price: 85, category: 'Fragrance', image: 'https://images.unsplash.com/photo-1590736704728-f4730bb30770?auto=format&fit=crop&q=80&w=800' },
+        { 
+          _id: '1', 
+          name: 'Trousse de maquillage', 
+          description: 'Une magnifique trousse transparente rose contenant 5 essentiels : Concealer, Blush, Gloss, Mascara et Contour des Lèvres. En bonus : un mini parfum en cadeau !',
+          price: 45, 
+          category: 'Makeup', 
+          image: '/trousse.jpg',
+          stock: 1
+        }
       ];
     }
     return products.map(p => ({
@@ -33,7 +36,8 @@ async function getProducts(query?: string, category?: string) {
       price: p.price,
       discount: p.discount || 0,
       category: p.category,
-      image: p.image || 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800'
+      image: p.image || 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800',
+      stock: p.stock ?? 1
     }));
   } catch (error) {
     console.error("Failed to fetch products:", error);

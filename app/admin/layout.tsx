@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, Package, ShoppingCart, Users, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Users, Settings, LogOut, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AdminGuard } from '@/components/AdminGuard';
 
@@ -8,6 +8,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { icon: LayoutDashboard, label: 'Overview', href: '/admin' },
     { icon: Package, label: 'Products', href: '/admin/products' },
     { icon: ShoppingCart, label: 'Orders', href: '/admin/orders' },
+    { icon: Gift, label: 'Points', href: '/admin/points' },
     { icon: Users, label: 'Customers', href: '/admin/customers' },
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ];
