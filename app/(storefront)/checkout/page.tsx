@@ -12,7 +12,6 @@ import { toast } from 'sonner';
 import { ShoppingBag, Truck, ShieldCheck, ArrowRight } from 'lucide-react';
 
 const SHIPPING_FEE = 0.00;
-const WHATSAPP_NUMBER = "21652612052"; // Removed the + for the wa.me link
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -42,7 +41,7 @@ export default function CheckoutPage() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     
-    // Compile order details into a single readable message for WhatsApp
+    // Compile order details into a single readable message for Messenger
     let orderDetails = `*NEW ORDER (Cash on Delivery)* 🛍️\n\n`;
     orderDetails += `*Customer Details:*\n`;
     orderDetails += `👤 Name: ${formData.get('firstName')} ${formData.get('lastName')}\n`;

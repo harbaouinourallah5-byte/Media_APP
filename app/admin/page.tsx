@@ -87,18 +87,22 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="lg:col-span-7">
+        <Card className="col-span-full xl:col-span-1 border-primary/20 bg-primary/5">
           <CardHeader>
-            <CardTitle>Dashboard Note</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              Order Fulfillment
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground bg-muted/30 rounded-lg border-2 border-dashed">
-              <MessageSquare className="h-10 w-10 mb-4 opacity-50 text-primary" />
-              <h3 className="text-lg font-medium text-foreground">Sales are tracked via WhatsApp</h3>
-              <p className="max-w-md mt-2">
-                Since your customers place their final orders by messaging you directly on WhatsApp, 
-                this dashboard focuses on your catalog, users, and community engagement. 
-              </p>
+            <div className="space-y-4">
+              <div className="p-4 bg-background rounded-lg border">
+                <h3 className="text-lg font-medium text-foreground">Sales are tracked via Messenger</h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Since your customers place their final orders by messaging you directly on Messenger, 
+                  this dashboard tracks user sign-ups, reviews, and product popularity rather than direct revenue.
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
