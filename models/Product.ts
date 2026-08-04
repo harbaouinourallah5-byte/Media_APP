@@ -7,6 +7,7 @@ export interface IProduct {
   discount: number;
   category: string;
   image: string;
+  images?: string[];
   stock: number;
   featured: boolean;
   pointsCost?: number;
@@ -28,6 +29,7 @@ const ProductSchema = new mongoose.Schema({
   discount: { type: Number, default: 0, min: 0, max: 100 },
   category: { type: String, required: true },
   image: { type: String, required: true },
+  images: [{ type: String }],
   stock: { type: Number, required: true, default: 0 },
   featured: { type: Boolean, default: false },
   pointsCost: { type: Number, default: 0 },

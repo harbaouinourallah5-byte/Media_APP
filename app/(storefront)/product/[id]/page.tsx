@@ -11,6 +11,8 @@ import { AddToCartButton } from '@/components/AddToCartButton';
 import { RedeemPointsButton } from '@/components/RedeemPointsButton';
 import { ProductReviews } from '@/components/ProductReviews';
 
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+
 async function getProduct(id: string) {
   if (id === '1') {
     return {
@@ -21,6 +23,7 @@ async function getProduct(id: string) {
       discount: 0,
       category: 'Makeup',
       image: '/trousse.jpg',
+      images: ['/trousse.jpg'],
       stock: 10,
       pointsCost: 0,
       rating: 5,
@@ -41,6 +44,7 @@ async function getProduct(id: string) {
       discount: product.discount || 0,
       category: product.category,
       image: product.image,
+      images: product.images && product.images.length > 0 ? product.images : (product.image ? [product.image] : []),
       stock: product.stock,
       pointsCost: product.pointsCost || 0,
       rating: product.rating || 0,
@@ -67,16 +71,30 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
             {/* Image Gallery */}
             <div className="w-full lg:w-1/2">
-              <div className="relative aspect-square rounded-3xl overflow-hidden bg-muted">
-                  <Image 
-                    src={product.image} 
-                    alt={product.name} 
-                    fill 
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover animate-slow-zoom" 
-                    priority
-                  />
-              </div>
+              <Carousel className="w-full max-w-xl mx-auto">
+                <CarouselContent>
+                  {product.images.map((img: string, idx: number) => (
+                    <CarouselItem key={idx}>
+                      <div className="relative aspect-square rounded-3xl overflow-hidden bg-muted">
+                        <Image 
+                          src={img} 
+                          alt={`${product.name} - Image ${idx + 1}`} 
+                          fill 
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover" 
+                          priority={idx === 0}
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                {product.images.length > 1 && (
+                  <>
+                    <CarouselPrevious className="left-4" />
+                    <CarouselNext className="right-4" />
+                  </>
+                )}
+              </Carousel>
             </div>
             
             {/* Product Info */}
