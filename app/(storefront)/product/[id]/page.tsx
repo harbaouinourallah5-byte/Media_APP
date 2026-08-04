@@ -103,14 +103,14 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
               <div className="flex items-center gap-4 mb-6">
                 {product.discount > 0 ? (
                   <>
-                    <span className="text-3xl font-bold text-primary">${(product.price * (1 - product.discount / 100)).toFixed(2)}</span>
-                    <span className="text-xl text-muted-foreground line-through">${product.price.toFixed(2)}</span>
+                    <span className="text-3xl font-bold text-primary">{(product.price * (1 - product.discount / 100)).toFixed(2)} DT</span>
+                    <span className="text-xl text-muted-foreground line-through">{product.price.toFixed(2)} DT</span>
                     <span className="bg-destructive/10 text-destructive px-3 py-1 rounded-full text-sm font-bold tracking-wide">
                       Save {product.discount}%
                     </span>
                   </>
                 ) : (
-                  <span className="text-3xl font-bold text-primary">${product.price.toFixed(2)}</span>
+                  <span className="text-3xl font-bold text-primary">{product.price.toFixed(2)} DT</span>
                 )}
               </div>
               
@@ -159,7 +159,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
                   </div>
                   <div>
                     <h4 className="text-sm font-semibold text-foreground">Free Shipping</h4>
-                    <p className="text-xs">On orders over $50</p>
+                    <p className="text-xs">On orders over 50 DT</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">

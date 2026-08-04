@@ -46,7 +46,7 @@ export default function Cart() {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-heading font-semibold text-lg">{item.name}</h3>
-                      <p className="text-primary font-medium mt-1">${item.price.toFixed(2)}</p>
+                      <p className="text-primary font-medium mt-1">{item.price.toFixed(2)} DT</p>
                     </div>
                     <div className="flex items-center gap-3">
                       <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
@@ -73,7 +73,7 @@ export default function Cart() {
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between text-muted-foreground">
                       <span>Subtotal</span>
-                      <span>${baseTotal.toFixed(2)}</span>
+                      <span>{baseTotal.toFixed(2)} DT</span>
                     </div>
                     <div className="flex justify-between text-muted-foreground">
                       <span>Shipping</span>
@@ -81,7 +81,7 @@ export default function Cart() {
                     </div>
                     <div className="border-t border-border pt-4 flex justify-between font-bold text-lg">
                       <span>Total</span>
-                      <span>${finalTotal.toFixed(2)}</span>
+                      <span>{finalTotal.toFixed(2)} DT</span>
                     </div>
                   </div>
 

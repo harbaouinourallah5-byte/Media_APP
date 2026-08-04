@@ -119,7 +119,7 @@ export function EditProductForm({ product }: { product: Product }) {
               <Input id="category" name="category" required defaultValue={product.category} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="price">Price ($)</Label>
+              <Label htmlFor="price">Price (DT)</Label>
               <Input id="price" name="price" type="number" step="0.01" required defaultValue={product.price} />
             </div>
             <div className="space-y-2">

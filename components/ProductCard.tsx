@@ -93,11 +93,11 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         <div className="mt-auto flex items-center gap-2">
           {discount > 0 ? (
             <>
-              <span className="font-medium text-lg text-primary">${discountedPrice.toFixed(2)}</span>
-              <span className="text-muted-foreground line-through text-sm">${product.price.toFixed(2)}</span>
+              <span className="font-medium text-lg text-primary">{discountedPrice.toFixed(2)} DT</span>
+              <span className="text-muted-foreground line-through text-sm">{product.price.toFixed(2)} DT</span>
             </>
           ) : (
-            <span className="font-medium text-lg">${product.price.toFixed(2)}</span>
+            <span className="font-medium text-lg">{product.price.toFixed(2)} DT</span>
           )}
         </div>
       </div>

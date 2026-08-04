@@ -57,7 +57,7 @@ export function Header() {
                     </Link>
                   ))}
                   <div className="pt-4">
-                    <ThemeToggle />
+                    {/* ThemeToggle removed for mobile view to simplify */}
                   </div>
                 </nav>
               </SheetContent>

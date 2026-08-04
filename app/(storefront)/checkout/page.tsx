@@ -52,12 +52,12 @@ export default function CheckoutPage() {
     
     orderDetails += `*Order Items:*\n`;
     items.forEach(item => {
-      orderDetails += `- ${item.quantity}x ${item.name} ($${item.price.toFixed(2)})\n`;
+      orderDetails += `- ${item.quantity}x ${item.name} (${item.price.toFixed(2)} DT)\n`;
     });
     
-    orderDetails += `\n*Subtotal:* $${totalPrice().toFixed(2)}\n`;
-    orderDetails += `*Shipping:* $${SHIPPING_FEE.toFixed(2)}\n`;
-    orderDetails += `*TOTAL TO COLLECT:* $${total.toFixed(2)}`;
+    orderDetails += `\n*Subtotal:* ${totalPrice().toFixed(2)} DT\n`;
+    orderDetails += `*Shipping:* ${SHIPPING_FEE.toFixed(2)} DT\n`;
+    orderDetails += `*TOTAL TO COLLECT:* ${total.toFixed(2)} DT`;
 
     const pointsEarned = Math.floor(total / 5);
 
@@ -165,7 +165,7 @@ export default function CheckoutPage() {
                 <ShoppingBag className="h-5 w-5 text-primary opacity-50" />
               </div>
               <p className="text-muted-foreground text-sm mt-4 ml-7">
-                You will pay exactly <span className="font-semibold text-foreground">${total.toFixed(2)}</span> to the delivery driver when your package arrives.
+                You will pay exactly <span className="font-semibold text-foreground">{total.toFixed(2)} DT</span> to the delivery driver when your package arrives.
               </p>
             </div>
           </div>
@@ -195,17 +195,17 @@ export default function CheckoutPage() {
               <div className="space-y-3 pb-6 border-b text-sm">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Subtotal ({totalItems()} items)</span>
-                  <span>${totalPrice().toFixed(2)}</span>
+                  <span>{totalPrice().toFixed(2)} DT</span>
                 </div>
                 <div className="flex justify-between text-muted-foreground">
                   <span>Shipping Fee</span>
-                  <span>${SHIPPING_FEE.toFixed(2)}</span>
+                  <span>{SHIPPING_FEE.toFixed(2)} DT</span>
                 </div>
               </div>
 
               <div className="flex justify-between items-center py-6">
                 <span className="text-lg font-semibold">Total</span>
-                <span className="text-2xl font-bold text-primary">${total.toFixed(2)}</span>
+                <span className="text-2xl font-bold text-primary">{total.toFixed(2)} DT</span>
               </div>
 
               <Button 

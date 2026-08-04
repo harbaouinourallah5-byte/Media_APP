@@ -67,7 +67,7 @@ export default async function AdminOrders() {
                   <div className="text-sm text-muted-foreground">{order.email}</div>
                 </TableCell>
                 <TableCell>{order.date}</TableCell>
-                <TableCell>${order.totalPrice.toFixed(2)}</TableCell>
+                <TableCell>{order.totalPrice.toFixed(2)} DT</TableCell>
                 <TableCell>
                   <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${getStatusColor(order.status)}`}>
                     {order.status}
