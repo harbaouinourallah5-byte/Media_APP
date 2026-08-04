@@ -17,14 +17,15 @@ const fixImages = async () => {
     
     const images = [
       '/products/pink-kit/media_1785885348604.jpg',
-      '/products/pink-kit/media_1785883976716.jpg',
-      '/products/pink-kit/media_1785883976718.jpg',
-      '/products/pink-kit/media_1785877762618.jpg',
-      '/products/pink-kit/media_1785877762621.jpg',
-      '/products/pink-kit/media_1785877762625.jpg',
-      '/products/pink-kit/media_1785877762815.jpg',
-      '/products/pink-kit/media_1785885154910.jpg',
-      '/products/pink-kit/media_1785885154922.jpg',
+      '/products/pink-kit/media_1785886067461.jpg',
+      '/products/pink-kit/media_1785886066740.jpg',
+      '/products/pink-kit/media_1785886066640.jpg',
+      '/products/pink-kit/media_1785886066580.jpg',
+      '/products/pink-kit/media_1785886066375.jpg',
+      '/products/pink-kit/media_1785886572293.jpg',
+      '/products/pink-kit/media_1785886572181.jpg',
+      '/products/pink-kit/media_1785886572171.jpg',
+      '/products/pink-kit/media_1785886564422.jpg',
     ];
 
     const result = await Product.updateMany(
