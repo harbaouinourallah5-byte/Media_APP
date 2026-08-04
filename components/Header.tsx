@@ -18,6 +18,7 @@ export function Header() {
   const { totalItems } = useCart();
   const { user, logout } = useAuth();
   const [mounted, setMounted] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -36,7 +37,7 @@ export function Header() {
         {/* Left Side: Mobile Menu, Logo, Theme Toggle */}
         <div className="flex items-center gap-4 lg:w-[250px]">
           <div className="lg:hidden">
-            <Sheet>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger render={<Button variant="ghost" size="icon" />}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle menu</span>
@@ -47,6 +48,7 @@ export function Header() {
                     <Link
                       key={route.href}
                       href={route.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
                       className={`text-lg font-medium transition-colors hover:text-primary ${
                         pathname === route.href ? 'text-primary' : 'text-foreground/80'
                       }`}
