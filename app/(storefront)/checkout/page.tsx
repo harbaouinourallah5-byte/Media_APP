@@ -207,6 +207,12 @@ export default function CheckoutPage() {
                 <span className="text-2xl font-bold text-primary">{total.toFixed(2)} DT</span>
               </div>
 
+              <div className="bg-primary/10 border border-primary/20 p-4 rounded-xl mb-6">
+                <p className="text-sm font-medium text-foreground text-center">
+                  ⚠️ Your order details will be copied automatically. Just hit <strong>Paste</strong> in the Instagram chat when it opens!
+                </p>
+              </div>
+
               <Button 
                 type="submit" 
                 form="checkout-form"
