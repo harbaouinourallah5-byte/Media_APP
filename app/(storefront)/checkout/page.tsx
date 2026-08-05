@@ -41,7 +41,7 @@ export default function CheckoutPage() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     
-    // Compile order details into a single readable message for Messenger
+    // Compile order details into a single readable message for Instagram
     let orderDetails = `*NEW ORDER (Cash on Delivery)* 🛍️\n\n`;
     orderDetails += `*Customer Details:*\n`;
     orderDetails += `👤 Name: ${formData.get('firstName')} ${formData.get('lastName')}\n`;
@@ -84,18 +84,18 @@ export default function CheckoutPage() {
       console.error("Failed to save order", err);
     }
 
-    // Copy the text for the user so they can paste it in Messenger
+    // Copy the text for the user so they can paste it in Instagram
     try {
       await navigator.clipboard.writeText(orderDetails);
-      toast.success("Order details copied! Please paste them in the Messenger chat to confirm your order.", { duration: 6000 });
+      toast.success("Order details copied! Please paste them in the Instagram chat to confirm your order.", { duration: 6000 });
     } catch (e) {
       console.error("Failed to copy text", e);
     }
     
-    const messengerUrl = `https://www.facebook.com/messages/t/61591538024777`;
+    const instagramUrl = `https://ig.me/m/medina_beauty2`;
 
-    // Open Messenger in a new tab
-    window.open(messengerUrl, '_blank');
+    // Open Instagram in a new tab
+    window.open(instagramUrl, '_blank');
 
     // Clear cart and go back home
     clearCart();
@@ -213,7 +213,7 @@ export default function CheckoutPage() {
                 disabled={isSubmitting}
                 className="w-full h-14 text-lg rounded-xl flex items-center gap-2"
               >
-                {isSubmitting ? "Processing..." : "Order via Messenger"}
+                {isSubmitting ? "Processing..." : "Order via Instagram"}
                 {!isSubmitting && <ArrowRight className="h-5 w-5" />}
               </Button>
             </div>

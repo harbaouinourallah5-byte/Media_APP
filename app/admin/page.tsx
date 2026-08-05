@@ -97,9 +97,9 @@ export default async function AdminDashboard() {
           <CardContent>
             <div className="space-y-4">
               <div className="p-4 bg-background rounded-lg border">
-                <h3 className="text-lg font-medium text-foreground">Sales are tracked via Messenger</h3>
+                <h3 className="text-lg font-medium text-foreground">Sales are tracked via Instagram</h3>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Since your customers place their final orders by messaging you directly on Messenger, 
+                  Since your customers place their final orders by messaging you directly on Instagram, 
                   this dashboard tracks user sign-ups, reviews, and product popularity rather than direct revenue.
                 </p>
               </div>

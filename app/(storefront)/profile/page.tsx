@@ -128,16 +128,16 @@ export default function ProfilePage() {
                 <CardTitle className="flex items-center gap-2">
                   <Package className="h-5 w-5" /> Order History
                 </CardTitle>
-                <CardDescription>Your recent orders made via Messenger.</CardDescription>
+                <CardDescription>Your recent orders made via Instagram.</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-6 border-t">
                 <div className="text-center py-12 bg-muted rounded-xl border border-dashed border-border">
                   <div className="bg-primary/10 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <MessageSquare className="h-8 w-8 text-primary" />
                   </div>
                   <h3 className="text-xl font-heading font-semibold mb-2">Order History Unavailable</h3>
-                  <p>All orders are processed directly through Messenger.</p>
-                  <p className="text-sm mt-1">Check your Messenger chat history for past orders.</p>
+                  <p>All orders are processed directly through Instagram.</p>
+                  <p className="text-sm mt-1">Check your Instagram chat history for past orders.</p>
                 </div>
               </CardContent>
             </Card>
