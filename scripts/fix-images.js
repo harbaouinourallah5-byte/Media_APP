@@ -23,7 +23,6 @@ const fixImages = async () => {
       '/products/pink-kit/media_1785886066580.jpg',
       '/products/pink-kit/media_1785886066375.jpg',
       '/products/pink-kit/media_1785886572293.jpg',
-      '/products/pink-kit/media_1785886572181.jpg',
       '/products/pink-kit/media_1785886572171.jpg',
       '/products/pink-kit/media_1785886564422.jpg',
     ];
