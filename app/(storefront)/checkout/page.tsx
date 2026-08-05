@@ -92,7 +92,7 @@ export default function CheckoutPage() {
       console.error("Failed to copy text", e);
     }
     
-    const messengerUrl = `https://m.me/61591538024777`;
+    const messengerUrl = `https://www.facebook.com/messages/t/61591538024777`;
 
     // Open Messenger in a new tab
     window.open(messengerUrl, '_blank');
