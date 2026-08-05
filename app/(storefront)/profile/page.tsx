@@ -4,7 +4,7 @@ import { useAuth } from '@/store/useAuth';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { User, Mail, Gift, LogOut, Package } from 'lucide-react';
+import { User, Mail, Gift, LogOut, Package, MessageSquare } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export default function ProfilePage() {
