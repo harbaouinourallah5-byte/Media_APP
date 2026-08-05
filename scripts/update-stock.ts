@@ -1,9 +1,9 @@
 import { connect } from 'mongoose';
-import dbConnect from './lib/mongodb';
-import Product from './models/Product';
+import dbConnect from '../lib/mongodb';
+import Product from '../models/Product';
 import { config } from 'dotenv';
 
-config({ path: '.env.local' });
+config({ path: '../.env.local' });
 
 async function run() {
   await dbConnect();

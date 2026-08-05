@@ -25,8 +25,9 @@ async function getProduct(id: string) {
       price: 45,
       discount: 0,
       category: 'Makeup',
-      image: '/products/pink-kit/media_1785888388669.jpg',
+      image: '/products/pink-kit/media_1785932917950.jpg',
       images: [
+        '/products/pink-kit/media_1785932917950.jpg',
         '/products/pink-kit/media_1785888388669.jpg',
         '/products/pink-kit/media_1785886067461.jpg',
         '/products/pink-kit/media_1785886066740.jpg',
