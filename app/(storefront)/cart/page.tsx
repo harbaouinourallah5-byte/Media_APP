@@ -18,7 +18,8 @@ export default function Cart() {
   }, []);
 
   const baseTotal = totalPrice();
-  const finalTotal = baseTotal;
+  const shippingCost = 8.00;
+  const finalTotal = baseTotal + shippingCost;
 
   if (!mounted) return null;
 
@@ -57,8 +58,8 @@ export default function Cart() {
                         <Plus className="h-3 w-3" />
                       </Button>
                     </div>
-                    <div className="w-20 text-right font-semibold">
-                      ${(item.price * item.quantity).toFixed(2)}
+                    <div className="w-24 text-right font-semibold">
+                      {(item.price * item.quantity).toFixed(2)} DT
                     </div>
                     <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive transition-colors" onClick={() => removeItem(item.id)}>
                       <Trash2 className="h-5 w-5" />
@@ -77,7 +78,7 @@ export default function Cart() {
                     </div>
                     <div className="flex justify-between text-muted-foreground">
                       <span>Shipping</span>
-                      <span className="text-primary font-medium">Free (COD)</span>
+                      <span className="text-primary font-medium">{shippingCost.toFixed(2)} DT</span>
                     </div>
                     <div className="border-t border-border pt-4 flex justify-between font-bold text-lg">
                       <span>Total</span>

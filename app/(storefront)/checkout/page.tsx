@@ -11,7 +11,7 @@ import { useCart } from '@/store/useCart';
 import { toast } from 'sonner';
 import { ShoppingBag, Truck, ShieldCheck, ArrowRight } from 'lucide-react';
 
-const SHIPPING_FEE = 0.00;
+const SHIPPING_FEE = 8.00;
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -185,7 +185,7 @@ export default function CheckoutPage() {
                       <p className="text-muted-foreground text-sm mt-1">Qty: {item.quantity}</p>
                     </div>
                     <div className="font-medium text-sm">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      {(item.price * item.quantity).toFixed(2)} DT
                     </div>
                   </div>
                 ))}
