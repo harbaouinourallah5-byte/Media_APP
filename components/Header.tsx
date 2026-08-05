@@ -56,8 +56,11 @@ export function Header() {
                       {route.label}
                     </Link>
                   ))}
-                  <div className="pt-4">
-                    {/* ThemeToggle removed for mobile view to simplify */}
+                  <div className="pt-4 border-t border-border mt-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium">Dark Mode</span>
+                      <ThemeToggle />
+                    </div>
                   </div>
                 </nav>
               </SheetContent>
