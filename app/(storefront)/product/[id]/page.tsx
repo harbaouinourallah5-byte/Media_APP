@@ -191,7 +191,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
                   </div>
                   <div>
                     <h4 className="text-sm font-semibold text-foreground">Free Shipping</h4>
-                    <p className="text-xs">On orders over 50 DT</p>
+                    <p className="text-xs">On orders over 100 DT</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">

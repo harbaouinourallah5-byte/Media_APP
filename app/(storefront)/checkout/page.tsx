@@ -11,8 +11,6 @@ import { useCart } from '@/store/useCart';
 import { toast } from 'sonner';
 import { ShoppingBag, Truck, ShieldCheck, ArrowRight } from 'lucide-react';
 
-const SHIPPING_FEE = 8.00;
-
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, totalPrice, clearCart, totalItems } = useCart();
@@ -25,6 +23,7 @@ export default function CheckoutPage() {
     setMounted(true);
   }, []);
 
+  const SHIPPING_FEE = totalPrice() >= 100 ? 0 : 8.00;
   const total = totalPrice() + SHIPPING_FEE;
 
   // Redirect if cart is empty

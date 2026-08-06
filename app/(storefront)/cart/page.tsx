@@ -18,7 +18,7 @@ export default function Cart() {
   }, []);
 
   const baseTotal = totalPrice();
-  const shippingCost = 8.00;
+  const shippingCost = baseTotal >= 100 ? 0 : 8.00;
   const finalTotal = baseTotal + shippingCost;
 
   if (!mounted) return null;
